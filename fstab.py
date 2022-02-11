@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
 import yaml
 
 
-def main():
+def main(file):
     # Grab YAML data from the file
-    with open('fstab.yaml', 'r') as f:
+    with open(file, 'r') as f:
         fstab = yaml.safe_load(f)
 
     # Load in the devices
@@ -31,4 +32,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # Check if file is provided as an argument, fallback to fstab.yaml if not
+    if sys.argv[1:]:
+        file = sys.argv[1]
+    else:
+        file = "fstab.yaml"
+
+    main(file)
